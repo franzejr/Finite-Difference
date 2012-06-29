@@ -48,7 +48,7 @@ public class FiniteDifference {
 		// Element 3
 		this.mask.set(3, 0, 1 / (dx * dx));
 		// Element 4
-		this.mask.set(1, 0, 1 / (dy * dy));
+		this.mask.set(4, 0, 1 / (dy * dy));
 	}
 
 	public void setCoefficients() {
@@ -80,6 +80,7 @@ public class FiniteDifference {
 	public void applyMask() {
 		  int k=0; //Linha da matriz de coefficients
 		    int w = 0; //Coluna da matriz de coefficients
+		    int num = N-2;
 		    double value;
 
 		    for (int i=0;i<(this.N)-2;i++){
@@ -94,44 +95,48 @@ public class FiniteDifference {
 		                if (j == 0){
 
 		                    //Direita
-		                    w = 2*i + (j+1);
+		                    w = num*i + (j+1);
 		                    value = this.mask.get(3,0);
+		                    //System.out.println(this.mask.get(3, 0));	
 		                    this.coefficients.set(k,w, value);
+		                    //System.out.println(this.coefficients.get(k, w));
 
 		                    //Cima
-		                    w = 2*(i+1) + j;
+		                    w = num*(i+1) + j;
 		                    //System.out.println("k"+k+"w"+w);
 		                    value = this.mask.get(4,0);
+		                    //System.out.println(this.mask.get(4, 0));
 		                    this.coefficients.set(k,w, value);
+		                    //System.out.println(this.coefficients.get(k, w));
 
 		                } else {
 		                    if (j == (this.N)-3){
 
 		                        //Cima
-		                        w = 2*(i+1) + j;
+		                        w = num*(i+1) + j;
 		                        value = this.mask.get(4,0);
 		                        this.coefficients.set(k,w, value);
 
 		                        //Esquerda
-		                        w = 2*i + (j-1);
+		                        w = num*i + (j-1);
 		                        value = this.mask.get(1,0);
 		                        this.coefficients.set(k,w, value);
 		                    } else {
 
 		                        //Cima
-		                        w = 2*(i+1) + j;
+		                        w = num*(i+1) + j;
 		                        //System.out.println("k"+k+"w"+w);
 		                        value = this.mask.get(4,0);
 		                        this.coefficients.set(k,w, value);
 
 		                        //Direita
-		                        w = 2*i + (j+1);
+		                        w = num*i + (j+1);
 
 		                        value = this.mask.get(3,0);
 		                        this.coefficients.set(k, w, value);
 
 		                        //Esquerda
-		                        w = 2*i + (j-1);
+		                        w = num*i + (j-1);
 		                        value = this.mask.get(1,0);
 		                        this.coefficients.set(k,w, value);
 
@@ -145,14 +150,14 @@ public class FiniteDifference {
 		                    if (j == 0){
 
 		                        //Direita
-		                        w = 2*i + (j+1);
+		                        w = num*i + (j+1);
 
 		                        value = this.mask.get(3,0);
 		                        this.coefficients.set(k, w, value);
 
 
 		                        //Baixo
-		                        w = 2*(i-1) + j;
+		                        w = num*(i-1) + j;
 
 		                        value = this.mask.get(2,0);
 		                        this.coefficients.set(k,w, value);
@@ -160,13 +165,13 @@ public class FiniteDifference {
 		                        if (j == this.N-3){
 
 		                            //Baixo
-		                            w = 2*(i-1) + j;
+		                            w = num*(i-1) + j;
 
 		                            value = this.mask.get(2,0);
 		                            this.coefficients.set(k,w, value);
 
 		                            //Esquerda
-		                            w = 2*i + (j-1);
+		                            w = num*i + (j-1);
 
 		                            value = this.mask.get(1,0);
 		                            this.coefficients.set(k,w,value);
@@ -174,19 +179,19 @@ public class FiniteDifference {
 		                        } else {
 
 		                            //Baixo
-		                            w = 2*(i-1) + j;
+		                            w = num*(i-1) + j;
 
 		                            value = this.mask.get(2,0);
 		                            this.coefficients.set(k,w, value);
 
 		                            //Esquerda
-		                            w = 2*i + (j-1);
+		                            w = num*i + (j-1);
 
 		                            value = this.mask.get(1,0);
 		                            this.coefficients.set(k,w,value);
 
 		                            //Direita
-		                            w = 2*i + (j+1);
+		                            w = num*i + (j+1);
 
 		                            value = this.mask.get(3,0);
 		                            this.coefficients.set(k, w, value);
@@ -199,19 +204,19 @@ public class FiniteDifference {
 		                    if (j == 0){
 
 		                        //Baixo
-		                        w = 2*(i-1) + j;
+		                        w = num*(i-1) + j;
 
 		                        value = this.mask.get(2,0);
 		                        this.coefficients.set(k,w, value);
 
 		                        //Cima
-		                        w = 2*(i+1) + j;
+		                        w = num*(i+1) + j;
 
 		                        value = this.mask.get(4,0);
 		                        this.coefficients.set(k,w, value);
 
 		                        //Direita
-		                        w = 2*i + (j+1);
+		                        w = num*i + (j+1);
 
 		                        value = this.mask.get(3,0);
 		                        this.coefficients.set(k, w, value);
@@ -220,19 +225,19 @@ public class FiniteDifference {
 		                        if (j == this.N - 3){
 
 		                            //Baixo
-		                            w = 2*(i-1) + j;
+		                            w = num*(i-1) + j;
 
 		                            value = this.mask.get(2,0);
 		                            this.coefficients.set(k,w, value);
 
 		                            //Esquerda
-		                            w = 2*i + (j-1);
+		                            w = num*i + (j-1);
 
 		                            value = this.mask.get(1,0);
 		                            this.coefficients.set(k,w,value);
 
 		                            //Cima
-		                            w = 2*(i+1) + j;
+		                            w = num*(i+1) + j;
 
 		                            value = this.mask.get(4,0);
 		                            this.coefficients.set(k,w, value);
@@ -240,25 +245,25 @@ public class FiniteDifference {
 		                        } else {
 
 		                            //Baixo
-		                            w = 2*(i-1) + j;
+		                            w = num*(i-1) + j;
 
 		                            value = this.mask.get(2,0);
 		                            this.coefficients.set(k,w, value);
 
 		                            //Esquerda
-		                            w = 2*i + (j-1);
+		                            w = num*i + (j-1);
 
 		                            value = this.mask.get(1,0);
 		                            this.coefficients.set(k,w,value);
 
 		                            //Cima
-		                            w = 2*(i+1) + j;
+		                            w = num*(i+1) + j;
 
 		                            value = this.mask.get(4,0);
 		                            this.coefficients.set(k,w, value);
 
 		                            //Direita
-		                            w = 2*i + (j+1);
+		                            w = num*i + (j+1);
 
 		                            value = this.mask.get(3,0);
 
@@ -272,6 +277,7 @@ public class FiniteDifference {
 		            } k++;
 		        }
 		    }
+		    
 	}
 
 	public Matrix getCoefficients() {

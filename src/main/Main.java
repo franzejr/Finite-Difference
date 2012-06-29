@@ -9,7 +9,7 @@ public class Main {
 	public static void main(String args[]){
 		
 		//Discrete Value
-		int N = 4;
+		int N = 32;
 		
 		FiniteDifference finiteDifference = new FiniteDifference();
 		finiteDifference.setDomain(2, 2);
@@ -24,20 +24,23 @@ public class Main {
 		
 		Matrix coefficients = finiteDifference.getCoefficients();
 		
+		//finiteDifference.b.print(N, 2);
 		LUDecomposition luMatrix = Matrix.getLU(coefficients);
 		Matrix lowerMatrix = luMatrix.getL();
 		Matrix upperMatrix = luMatrix.getU();
 		
 		//L Matrix
-		//lowerMatrix.print(4, 1);
+		//lowerMatrix.print(4, 3);
 		//U Matrix
-		//upperMatrix.print(4,1);
+		//upperMatrix.print(4,3);
 		
 		//Solving
-		Matrix vectorZ = Matrix.solveSubstitution(lowerMatrix, finiteDifference.b);
-		Matrix points = Matrix.solveRetrosubstitution(upperMatrix, vectorZ);
+		Matrix y = Matrix.solveSubstitution(lowerMatrix, finiteDifference.b);
+		//System.out.println("ipsilon");
+		//y.print(4, 3);
+		Matrix points = Matrix.solveRetrosubstitution(upperMatrix, y);
 		
-		//points.print(4, 2);
+		//points.print(4, 8);
 		
 		
 		
